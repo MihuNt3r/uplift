@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Test from './models/Test';
+import { Habit } from "./models/Habit.ts";
 
 dotenv.config();
 
@@ -48,6 +49,22 @@ app.get('/test-mongo', async (_req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+app.post('/habits', async (req, res) => {
+
+
+    return;
+});
+
+app.get('/habits', async (req, res) => {
+    try {
+        const habits = await Habit.find();
+        res.status(200).json(habits);
+    } catch (err) {
+        console.error('Failed to fetch habits:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
